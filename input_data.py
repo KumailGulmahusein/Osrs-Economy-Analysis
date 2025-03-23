@@ -1,7 +1,7 @@
 import mysql.connector
 import requests
 
-#Connect to MySQL database
+# Connect to MySQL database
 conn = mysql.connector.connect(
     host='localhost',
     user='root',
@@ -10,12 +10,12 @@ conn = mysql.connector.connect(
 )
 cursor = conn.cursor()
 
-#Fetch JSON data from URL
+# Fetch JSON data from URL
 url = 'https://chisel.weirdgloop.org/gazproj/gazbot/os_dump.json'
 response = requests.get(url)
 data = response.json()
 
-#SQL insert statement
+# SQL insert statement
 sql = """
     INSERT INTO items (id, name, examine, members, lowalch, highalch, value, `limit`, icon, price, last, volume)
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
@@ -32,20 +32,20 @@ sql = """
         last = VALUES(last),
         volume = VALUES(volume)
 """
-#Open log file for failed items
+# Open log file for failed items
 failed_items_log = open('failed_items.log', 'w')
 
-#Loop through each item and handle errors
+# Loop through each item and handle errors
 successful = 0
 failed = 0
 
 for item_id, item in data.items():
     try:
-        #Process only if item is a dict
+        # Process only if item is a dict
         if not isinstance(item, dict):
             raise ValueError(f"Item {item_id} is not a dictionary.")
 
-        #Fetch each value
+        # Fetch each value
         id_val = item.get('id', 0)
         name_val = item.get('name', '')
         examine_val = item.get('examine', '')
@@ -74,7 +74,7 @@ for item_id, item in data.items():
             volume_val
         )
 
-        #Execute SQL
+        # Execute SQL
         cursor.execute(sql, values)
         successful += 1
         
@@ -84,10 +84,10 @@ for item_id, item in data.items():
         failed_items_log.write(error_message)
         failed += 1
 
-#Close log file
+# Close log file
 failed_items_log.close()
 
-#Commit and close DB connection
+# Commit and close DB connection
 conn.commit()
 cursor.close()
 conn.close()
