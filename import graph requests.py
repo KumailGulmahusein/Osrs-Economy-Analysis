@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 
 headers = {
     'User-Agent': 'Time Series',
-    'From': '@siirberus on Discord'
+    'From': '[DISCORD] on Discord'
 }
 
 # API details
