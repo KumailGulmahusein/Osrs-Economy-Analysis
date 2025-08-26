@@ -1,8 +1,8 @@
 import requests
 
 headers = {
-    'User-Agent': 'prioce_predictor - @siirberus on Discord',
-    'From': 'kumail.gulamhusein@gmail.com'
+    'User-Agent': '[DISCORD] on Discord',
+    'From': '[EMAIL]'
 }
 response = requests.get(f"https://prices.runescape.wiki/api/v1/osrs/latest?id={2}", headers=headers)
 data = response.json()
