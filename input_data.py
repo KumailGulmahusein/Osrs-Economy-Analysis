@@ -4,9 +4,9 @@ import requests
 # Connect to MySQL database
 conn = mysql.connector.connect(
     host='localhost',
-    user='root',
-    password='K2kul.',
-    database='osrs_data'
+    user='[USER]',
+    password='[PASS]',
+    database='[DATABASE]'
 )
 cursor = conn.cursor()
 
