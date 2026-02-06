@@ -1,2 +1,4 @@
 /myenv/
 config.py
+failed_items.log
+__pycache__/config.cpython-311.pyc

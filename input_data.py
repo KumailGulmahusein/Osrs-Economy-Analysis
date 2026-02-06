@@ -1,13 +1,11 @@
+#Data Index
 import mysql.connector
 import requests
+from config import DB_CONFIG
 
 # Connect to MySQL database
-conn = mysql.connector.connect(
-    host='localhost',
-    user='[USER]',
-    password='[PASS]',
-    database='[DATABASE]'
-)
+conn = mysql.connector.connect(**DB_CONFIG)
+
 cursor = conn.cursor()
 
 # Fetch JSON data from URL
